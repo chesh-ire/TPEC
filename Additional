@@ -1,0 +1,402 @@
+ADDITIONAL PROGRAMS
+
+MODULE -3
+Surprise Programs:
+
+
+1.	Print the linked list in reverse order 
+Given a pointer to the head of a singly-linked list, print each data value from the reversed list. If the given list is empty, do not print anything.
+Function Description
+Complete the reversePrint function in the editor below.
+reversePrint has the following parameters:
+•	SinglyLinkedListNode pointer head: a reference to the head of the list
+Prints
+The data values of each node in the reversed list.
+
+#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+typedef struct Node Node;
+
+// Function to create a new node
+Node* create_node(int data) {
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    new_node->data = data;
+    new_node->next = NULL;
+    return new_node;
+}
+
+// Function to insert a node at the end of the list
+void insert_node(Node** head, int data) {
+    Node* new_node = create_node(data);
+    if (*head == NULL) {
+        *head = new_node;
+    } else {
+        Node* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = new_node;
+    }
+}
+// Function to print the list
+void print_list(Node* head) {
+    Node* temp = head;
+    printf("The linked list is: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+// Complete the print reverse Function below
+
+int main() {
+    Node* head = NULL;
+    int n, data;
+    // Reading the number of nodes
+    printf("Enter the number of nodes: ");
+    scans("%d", &n);
+
+    // Reading the data for each node and inserting into the list
+    for (int i = 0; i < n; i++) {
+        printf("Enter data for node %d: ", i + 1);
+        scanf("%d", &data);
+        insert_node(&head, data);
+    }
+    // Printing the list before reversing
+    print_list(head);
+
+    // Printing the list in reverse order
+    printf("The linked list in reverse order is: ");
+    print_reverse(head);
+    printf("\n");
+
+    // Freeing the allocated memory
+    Node* temp;
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+    return 0;
+}
+
+2.	Delete the first node from the linked list 
+
+#include <stdio.h>
+#include <stdlib.h>
+struct node {
+    int data;          // Data 
+    struct node *next; // Address 
+} *head;
+void createList(int n);
+void deleteFirstNode();
+void displayList();
+int main()
+{
+    int n, choice;
+    printf("Enter the total number of nodes: ");
+    scanf("%d", &n);
+    createList(n);
+    printf("\nData in the list \n");
+    displayList();
+    printf("\nPress 1 to delete first node: ");
+    scanf("%d", &choice);
+    if(choice == 1)
+        deleteFirstNode();
+    printf("\nData in the list \n");
+    displayList();
+    return 0;
+}
+void createList(int n)
+{
+    struct node *newNode, *temp;
+    int data, i;
+    head = (struct node *)malloc(sizeof(struct node));
+      if(head == NULL)
+    {
+        printf("Unable to allocate memory.");
+    }
+    else
+
+{
+        printf("Enter the data of node 1: ");
+        scanf("%d", &data);
+        head->data = data; // Link the data field with data
+        head->next = NULL; // Link the address field to NULL
+        temp = head;
+        for(i=2; i<=n; i++)
+        {
+            newNode = (struct node *)malloc(sizeof(struct node));
+
+             if(newNode == NULL)
+            {
+                printf("Unable to allocate memory.");
+                break;
+            }
+            else
+            {
+                printf("Enter the data of node %d: ", i);
+                scanf("%d", &data);
+                newNode->data = data; // Link the data field of newNode with data
+                newNode->next = NULL; // Link the address field of newNode with NULL
+                temp->next = newNode; // Link previous node i.e. temp to the newNode
+                temp = temp->next;
+            }
+        }
+        printf("SINGLY LINKED LIST CREATED SUCCESSFULLY\n");
+    }
+}
+
+// Complete the deleteFirstNode Function below
+
+void displayList()
+{
+    struct node *temp;
+    if(head == NULL)
+    {
+        printf("List is empty.");
+    }
+    else
+    {
+        temp = head;
+        while(temp != NULL)
+        {
+            printf("Data = %d\n", temp->data); // Print data of current node
+            temp = temp->next;                 // Move to next node
+        }
+    }
+}
+MODULE -4
+1. Queue using Two Stacks (additional program)
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+void enqueue(int);
+void dequeue();
+void print_ele();
+int front=-1,rear=-1, size = 1000000;
+int a[1000000];
+
+int main() {
+
+/* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int q, choice;
+    scanf("%d",&q);
+    while(q-->0){
+        scanf("%d",&choice);
+        switch(choice){
+        case 1:{
+            int ele;
+            scanf("%d",&ele);
+            enqueue(ele);
+        }break;
+        case 2:{
+            dequeue();
+        }break;
+        case 3:{
+            print_ele();
+        }break;
+    }
+    }
+    
+    return 0;
+}
+
+// Complete the enqueue Function below
+
+void dequeue(){
+    if(front==rear==-1)
+        printf("empty queue \n");
+    else if(front==size)
+        front=0;
+    else if(front==rear){
+        front=-1;
+        rear=-1;
+    }
+        
+    else
+        front++;
+    
+}
+
+void print_ele(){
+    if(front==rear==-1)
+        printf("Queue empty \n");
+    else
+        printf("%d \n",a[front]);
+}
+
+
+
+
+
+
+2. Largest Rectangle (additional program)
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+char* readline();
+char* ltrim(char*);
+char* rtrim(char*);
+char** split_string(char*);
+
+int parse_int(char*);
+
+Complete the 'largestRectangle' function below.
+ 
+
+int main()
+{
+    FILE* fptr = fopen(getenv("OUTPUT_PATH"), "w");
+
+    int n = parse_int(ltrim(rtrim(readline())));
+
+    char** h_temp = split_string(rtrim(readline()));
+
+    int* h = malloc(n * sizeof(int));
+
+    for (int i = 0; i < n; i++) {
+        int h_item = parse_int(*(h_temp + i));
+
+        *(h + i) = h_item;
+    }
+
+    long result = largestRectangle(n, h);
+
+    fprintf(fptr, "%ld\n", result);
+
+    fclose(fptr);
+
+    return 0;
+}
+
+char* readline() {
+    size_t alloc_length = 1024;
+    size_t data_length = 0;
+
+    char* data = malloc(alloc_length);
+
+    while (true) {
+        char* cursor = data + data_length;
+        char* line = fgets(cursor, alloc_length - data_length, stdin);
+
+        if (!line) {
+            break;
+        }
+
+        data_length += strlen(cursor);
+
+        if (data_length < alloc_length - 1 || data[data_length - 1] == '\n') {
+            break;
+        }
+
+        alloc_length <<= 1;
+
+        data = realloc(data, alloc_length);
+
+        if (!data) {
+            data = '\0';
+
+            break;
+        }
+    }
+
+    if (data[data_length - 1] == '\n') {
+        data[data_length - 1] = '\0';
+
+        data = realloc(data, data_length);
+
+        if (!data) {
+            data = '\0';
+        }
+    } else {
+        data = realloc(data, data_length + 1);
+
+        if (!data) {
+            data = '\0';
+        } else {
+            data[data_length] = '\0';
+        }
+    }
+
+    return data;
+}
+
+char* ltrim(char* str) {
+    if (!str) {
+        return '\0';
+    }
+
+    if (!*str) {
+        return str;
+    }
+
+    while (*str != '\0' && isspace(*str)) {
+        str++;
+    }
+
+    return str;
+}
+
+char* rtrim(char* str) {
+    if (!str) {
+        return '\0';
+    }
+
+    if (!*str) {
+        return str;
+    }
+
+    char* end = str + strlen(str) - 1;
+
+    while (end >= str && isspace(*end)) {
+        end--;
+    }
+
+    *(end + 1) = '\0';
+
+    return str;
+}
+
+char** split_string(char* str) {
+    char** splits = NULL;
+    char* token = strtok(str, " ");
+
+    int spaces = 0;
+
+    while (token) {
+        splits = realloc(splits, sizeof(char*) * ++spaces);
+
+        if (!splits) {
+            return splits;
+        }
+
+        splits[spaces - 1] = token;
+
+        token = strtok(NULL, " ");
+    }
+
+    return splits;
+}
+
+int parse_int(char* str) {
+    char* endptr;
+    int value = strtol(str, &endptr, 10);
+
+    if (endptr == str || *endptr != '\0') {
+        exit(EXIT_FAILURE);
+    }
+
+    return value;
+}
